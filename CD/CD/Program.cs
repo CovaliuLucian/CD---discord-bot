@@ -18,18 +18,28 @@ namespace CD
 
             _client.Log += Log;
 
-            string token = "abcdefg..."; // Remember to keep this private!
-            await _client.LoginAsync(TokenType.Bot, token);
+            var token = new Token();
+            await _client.LoginAsync(TokenType.Bot, token.GetToken());
             await _client.StartAsync();
+
+            _client.MessageReceived += MessageReceived;
 
             // Block this task until the program is closed.
             await Task.Delay(-1);
         }
 
-        private Task Log(LogMessage msg)
+        private async Task MessageReceived(SocketMessage message)
+        {
+            if (message.Content == "!test")
+            {
+                await message.Channel.SendMessageAsync("aprob");
+            }
+        }
+
+        private static Task Log(LogMessage msg)
         {
             Console.WriteLine(msg.ToString());
-            return Task.CompletedTask;
+            return Task.FromResult(0);
         }
     }
 }

@@ -2,13 +2,18 @@
 
 namespace CD
 {
-    class Token
+    internal class Token
     {
         private readonly string token;
 
-        Token()
+        public Token()
         {
             token = System.IO.File.ReadLines("token.txt").First();
+        }
+
+        public string GetToken()
+        {
+            return token;
         }
     }
 }
