@@ -21,12 +21,16 @@ namespace CD
         [Summary("Echos a message.")]
         public async Task ReactionAsync([Remainder] [Summary("The text to echo")] string input)
         {
-            if (input.ToUpper() == "NANI?!")
+            var name = input.ToLower().Sanitize();
+            var url = ImagesUrl.GetUrl(name);
+            if (url == null)
             {
-                if(!File.Exists("images/nani.jpg"))
-                    await Downloader.DownloadAsync("https://media.discordapp.net/attachments/408242513141563395/408255825497292811/nani.jpg?width=907&height=511", "nani");
-                await Context.Channel.SendFileAsync("images/nani.jpg");
+                await ReplyAsync("Image not found");
+                return;
             }
+           
+            await Downloader.DownloadAsync(url, name);
+            await Context.Channel.SendFileAsync($"images/{name}.png");
         }
 
         [Group("pls")]

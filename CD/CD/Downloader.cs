@@ -9,6 +9,7 @@ namespace CD
     {
         public static async Task DownloadAsync(string url, string name)
         {
+            if (File.Exists($"images/{name}.png")) return;
             var httpClient = new HttpClient();
             var response = await httpClient.GetAsync(url);
             var inputStream = await response.Content.ReadAsStreamAsync();
@@ -16,9 +17,9 @@ namespace CD
             if (image != null)
             {
                 Stream outputStream = new MemoryStream();
-                image.SaveAsJpeg(outputStream); /*Saves the cat image as jpg (you can change this)*/
+                image.SaveAsPng(outputStream);
                 outputStream.Position = 0;
-                var file = File.Create($"images/{name}.jpg"); /*Saves it with the random string*/
+                var file = File.Create($"images/{name}.png"); 
                 await outputStream.CopyToAsync(file);
                 file.Dispose();           
             }
