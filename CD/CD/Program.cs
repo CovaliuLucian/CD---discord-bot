@@ -57,7 +57,8 @@ namespace CD
             var argPos = 0;
             var dummyPos = 0;
             // Determine if the message is a command, based on if it starts with '!' or a mention prefix
-            if (!message.HasMentionPrefix(_client.CurrentUser, ref argPos) && !message.HasStringPrefix("img", ref dummyPos)) return;
+            if (!message.HasMentionPrefix(_client.CurrentUser, ref argPos) &&
+                !(message.HasStringPrefix("img", ref dummyPos) || message.HasStringPrefix("Img", ref dummyPos))) return;
             // Create a Command Context
             var context = new SocketCommandContext(_client, message);
             // Execute the command. (result does not indicate a return value, 
@@ -73,6 +74,7 @@ namespace CD
             Console.WriteLine(message.ToString());
             return Task.FromResult(0);
         }
+        
     }
 
 }
