@@ -4,16 +4,16 @@ namespace CD
 {
     internal class Token
     {
-        private readonly string token;
+        private readonly string _token;
 
         public Token()
         {
-            token = System.IO.File.ReadLines("token.txt").First();
+            _token = System.IO.File.ReadLines("token.txt").First();
         }
 
         public string GetToken()
         {
-            return token;
+            return _token;
         }
     }
 }
