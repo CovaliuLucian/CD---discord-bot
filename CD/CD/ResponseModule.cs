@@ -25,9 +25,33 @@ namespace CD
                 await ReplyAsync("Image not found");
                 return;
             }
-           
+
             await Downloader.DownloadAsync(url, name);
             await Context.Channel.SendFileAsync($"images/{name}.png");
+        }
+
+        [Command("Hello")]
+        [Summary("Echos a hello")]
+        [Alias("Hi", "Greetings", "Hey")]
+        public async Task HelloAsync()
+        {
+            await ReplyAsync("Hello " + Context.User.Username);
+        }
+
+        [Command("text")]
+        [Summary("Makes text fancy")]
+        [Alias("fancy", "fancy text")]
+        public async Task FancyTextAsync([Remainder] string input)
+        {
+            await ReplyAsync(input.Fancy());
+        }
+
+        [Command("help")]
+        [Summary("help")]
+        [Alias("send help", "pls help", "help me")]
+        public async Task HelpAsync()
+        {
+            await ReplyAsync("Go fuck yourself!");
         }
 
         [Group("pls")]
@@ -41,16 +65,5 @@ namespace CD
                 await ReplyAsync($"Fuck {userInfo.Username}");
             }
         }
-
-        [Command("Hello")]
-        [Summary("Echos a message.")]
-        [Alias("Hi","Greetings","Hey")]
-        public async Task HelloAsync()
-        {
-            await ReplyAsync("Hello " + Context.User.Username);
-        }
-
-
-
     }
 }
