@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Discord.Commands;
 using Discord.WebSocket;
 
@@ -53,6 +52,24 @@ namespace CD
         public async Task HelpAsync()
         {
             await ReplyAsync("Go fuck yourself!");
+        }
+
+        [Command("bang")]
+        [Summary("bang (request from Mihai)")]
+        public async Task BangAsync(SocketUser user = null)
+        {
+            if (user != null)
+                await ReplyAsync($"{user.Username}, we'll bang, ok?");
+            else
+                await ReplyAsync("Nobody to bang? :sad:");
+
+        }
+
+        [Command("my id")]
+        [Summary("help")]
+        public async Task MyIdAsync()
+        {
+            await ReplyAsync($"Your ID is {Context.User.Id}");
         }
 
         [Command("refresh")]
