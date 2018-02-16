@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Discord.Commands;
 using Discord.WebSocket;
 
@@ -54,15 +55,32 @@ namespace CD
             await ReplyAsync("Go fuck yourself!");
         }
 
+        [Command("refresh")]
+        [Summary("refresh")]
+        public async Task RefreshAsync()
+        {
+            if (Context.User.Id == 196241129560211456)
+            {
+                await Downloader.DownloadImageListAsync();
+                ImagesUrl.Read();
+                await ReplyAsync("Refresh succesful!");
+            }
+            else
+                await ReplyAsync("Only the admin can refresh the command list");
+        }
+
         [Group("pls")]
         public class Sample : ModuleBase<SocketCommandContext>
         {
             [Command("fuck")]
             [Summary("Fuck that guy")]
-            public async Task FuckAsync([Summary("The (optional) user")] SocketUser user = null)
+            public async Task FuckAsync([Summary("The (optional) user")] SocketUser user = null, [Remainder]string mode = null)
             {
                 var userInfo = user ?? Context.Client.CurrentUser;
-                await ReplyAsync($"Fuck {userInfo.Username}");
+                var msg = $"Fuck {userInfo.Username}";
+                if (mode != null)
+                    msg += $", but {mode}";
+                await ReplyAsync(msg);
             }
         }
     }

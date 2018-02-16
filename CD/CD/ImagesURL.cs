@@ -10,12 +10,12 @@ namespace CD
 
         static ImagesUrl()
         {
-            urlDictionary = new Dictionary<string, string>();
             Read();
         }
 
-        private static void Read()
+        public static void Read()
         {
+            urlDictionary = new Dictionary<string, string>();
             if (!File.Exists("images/images.txt"))
                 throw new InvalidDataException("Images file not found");
             var lines = File.ReadAllLines("images/images.txt").ToList();

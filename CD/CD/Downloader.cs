@@ -24,5 +24,16 @@ namespace CD
                 file.Dispose();           
             }
         }
+
+        public static async Task DownloadImageListAsync()
+        {
+            var httpClient = new HttpClient();
+            var response = await httpClient.GetAsync("https://pastebin.com/raw/NHc7u1w7");
+            var inputStream = await response.Content.ReadAsStreamAsync();
+            var fileStream = File.Create($"images/images.txt");
+            inputStream.Seek(0, SeekOrigin.Begin);
+            inputStream.CopyTo(fileStream);
+            fileStream.Close();
+        }
     }
 }
