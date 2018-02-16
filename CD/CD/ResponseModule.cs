@@ -8,6 +8,7 @@ namespace CD
     {
         [Command("say")]
         [Summary("Echos a message.")]
+        [Alias("echo")]
         public async Task SayAsync([Remainder] [Summary("The text to echo")] string echo)
         {
             await ReplyAsync(echo);
@@ -34,7 +35,6 @@ namespace CD
         {
             [Command("fuck")]
             [Summary("Fuck that guy")]
-            [Alias("user", "whois")]
             public async Task FuckAsync([Summary("The (optional) user")] SocketUser user = null)
             {
                 var userInfo = user ?? Context.Client.CurrentUser;
@@ -44,6 +44,7 @@ namespace CD
 
         [Command("Hello")]
         [Summary("Echos a message.")]
+        [Alias("Hi","Greetings","Hey")]
         public async Task HelloAsync()
         {
             await ReplyAsync("Hello " + Context.User.Username);

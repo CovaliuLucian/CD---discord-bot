@@ -60,6 +60,7 @@ namespace CD
             if (!message.HasMentionPrefix(_client.CurrentUser, ref argPos) &&
                 !(message.HasStringPrefix("img", ref dummyPos) || message.HasStringPrefix("Img", ref dummyPos))) return;
             // Create a Command Context
+            argPos = TrimLeft(message.Content, argPos);
             var context = new SocketCommandContext(_client, message);
             // Execute the command. (result does not indicate a return value, 
             // rather an object stating if the command executed successfully)
@@ -73,6 +74,13 @@ namespace CD
         {
             Console.WriteLine(message.ToString());
             return Task.FromResult(0);
+        }
+
+        private static int TrimLeft(string input, int pos = 0)
+        {
+            while (input[pos] == ' ')
+                pos++;
+            return pos;
         }
         
     }
