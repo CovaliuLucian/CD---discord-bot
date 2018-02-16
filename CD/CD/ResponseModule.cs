@@ -1,8 +1,4 @@
-﻿using System;
-using System.IO;
-using System.Threading.Tasks;
-using Discord;
-using Discord.Audio.Streams;
+﻿using System.Threading.Tasks;
 using Discord.Commands;
 using Discord.WebSocket;
 
@@ -18,8 +14,8 @@ namespace CD
         }
 
         [Command("img")]
-        [Summary("Echos a message.")]
-        public async Task ReactionAsync([Remainder] [Summary("The text to echo")] string input)
+        [Summary("Sends a reaction image")]
+        public async Task ReactionAsync([Remainder] [Summary("The input")] string input)
         {
             var name = input.ToLower().Sanitize();
             var url = ImagesUrl.GetUrl(name);
@@ -39,14 +35,21 @@ namespace CD
             [Command("fuck")]
             [Summary("Fuck that guy")]
             [Alias("user", "whois")]
-            public async Task UserInfoAsync([Summary("The (optional) user")] SocketUser user = null)
+            public async Task FuckAsync([Summary("The (optional) user")] SocketUser user = null)
             {
                 var userInfo = user ?? Context.Client.CurrentUser;
                 await ReplyAsync($"Fuck {userInfo.Username}");
             }
         }
 
-        
+        [Command("Hello")]
+        [Summary("Echos a message.")]
+        public async Task HelloAsync()
+        {
+            await ReplyAsync("Hello " + Context.User.Username);
+        }
+
+
 
     }
 }
