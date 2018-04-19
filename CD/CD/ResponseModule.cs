@@ -48,7 +48,7 @@ namespace CD
 
         [Command("help")]
         [Summary("help")]
-        [Alias("send help", "pls help", "help me")]
+        [Alias("send help", "help me")]
         public async Task HelpAsync()
         {
             await ReplyAsync("Go fuck yourself!");
@@ -66,7 +66,7 @@ namespace CD
         }
 
         [Command("my id")]
-        [Summary("help")]
+        [Summary("shows your id")]
         public async Task MyIdAsync()
         {
             await ReplyAsync($"Your ID is {Context.User.Id}");
@@ -98,6 +98,14 @@ namespace CD
                 if (mode != null)
                     msg += $", but {mode}";
                 await ReplyAsync(msg);
+            }
+
+            [Command("help")]
+            [Summary("help")]
+            [Alias("send help", "help me")]
+            public async Task HelpAsync()
+            {
+                await ReplyAsync("Help is still in the works\nInvoke the bot by taging him at the start of the message(except the img command)\nCommands:\nimg for a reaction image (https://pastebin.com/NHc7u1w7)\ntext for making the text.. fancy ;)\npls fuck [tagged user] for..well, you can guess\nmore to come and document!");
             }
         }
     }
