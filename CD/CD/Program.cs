@@ -32,6 +32,7 @@ namespace CD
             await _commands.AddModulesAsync(Assembly.GetAssembly(typeof(ResponseModule)));
 
             await _client.LoginAsync(TokenType.Bot, token.GetToken());
+            await _client.SetGameAsync("with my ding-dong");
             await _client.StartAsync();
             
 
